@@ -1,7 +1,6 @@
 from realtime.connection import Socket
 from realtime.channel import Channel
 from .utils import *
-from discord_webhook import DiscordWebhook
 
 class OpenseaStreamClient():
     def __init__(self, api_key: str, network: Network = Network.MAINNET):
@@ -14,6 +13,7 @@ class OpenseaStreamClient():
         try:
             Logger('Connecting to socket').debug()
             self.socket.connect()
+            self.connected = True
         except Exception as e:
             Logger(f'Failed to connect to socket : {e}').error()
     
@@ -100,5 +100,19 @@ class OpenseaStreamClient():
         try:
             Logger(f"Listening for item offers on {collection_slug}").debug()
             return self.on(EventTypes.ITEM_RECEIVED_BID, collection_slug, callback)
+        except Exception as e:
+            Logger(e).error()
+
+    def onEvents(self, slugs: list, event_type: EventTypes, callback):
+        try:
+            if type(slugs) != list:
+                Logger('slugs params must be a list').error()
+                return
+            if type(event_type) != list:
+                Logger('slugs params must be a list').error()
+                return
+            for slug in slugs:
+                for event in event_type:
+                    self.on(event, slug, callback)
         except Exception as e:
             Logger(e).error()
