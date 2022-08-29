@@ -60,13 +60,13 @@ The OpenSea Stream API is available on the following networks:
 
 `wss://stream.openseabeta.com/socket`
 
-Mainnet supports events from the following blockchains: Ethereum, Polygon mainnet, Klaytn mainnet, and Solana mainnet.
+Mainnet support events from the following blockchains: Ethereum, Polygon mainnet, Klaytn mainnet, and Solana mainnet.
 
 ### Testnet
 
 `wss://testnets-stream.openseabeta.com/socket`
 
-Testnet supports events from the following blockchains: Rinkeby, Polygon testnet (Mumbai), and Klaytn testnet (Baobab).
+Testnet support events from the following blockchains: Rinkeby, Polygon testnet (Mumbai), and Klaytn testnet (Baobab).
 
 To create testnet instance of the client, you can create it with the following arguments:
 
@@ -128,7 +128,13 @@ Client.onItemReceivedBid('collection-slug', callback)
 Client.onItemReceivedOffer('collection-slug', callback)
 ```
 
-## Streaming multiple event types and multiple collection
+## Streaming order cancellation events
+
+```python
+Client.onItemCancelled('collection-slug', callback)
+```
+
+## Streaming multiple event types and multiple collections
 
 ```python
 Client.onEvents(
@@ -138,11 +144,6 @@ Client.onEvents(
     )
 ```
 
-## Streaming order cancellations events
-
-```python
-Client.onItemCancelled('collection-slug', callback)
-```
 
 # Subscribing to events from all collections
 
@@ -154,7 +155,7 @@ Types are included to make working with our event payload objects easier.
 
 # Webhook
 
-You might want to use our predefined but fully cusotmizable discord webhook management 
+You might want to use our predefined but fully Customizable discord webhook management 
 
 ```python
 from opensea_sdk import *
@@ -171,7 +172,7 @@ Client.startListening()
 
 ```
 
-You can change the color, the footer and the thumbnail of the webhook with this following arguments: 
+You can change the color, the footer and the thumbnail of the webhook with the following arguments: 
 
 ```python
 from opensea_sdk import *
