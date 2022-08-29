@@ -1,4 +1,3 @@
-from turtle import color
 from termcolor import cprint
 from discord_webhook import DiscordEmbed, DiscordWebhook
 

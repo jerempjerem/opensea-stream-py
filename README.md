@@ -18,7 +18,7 @@ This module requires Python 3 or later.
 [Python 3](https://www.python.org/downloads/)
 
 ```
-pip install opensea_sdk
+pip install opensea-stream
 ```
 
 # Getting Started

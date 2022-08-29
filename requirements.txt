@@ -1,0 +1,4 @@
+pip==21.1
+termcolor==1.1.0
+discord-webhook==0.16.3
+realtime==0.0.4
