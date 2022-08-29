@@ -191,3 +191,5 @@ Client.onItemListed('collection-slug', Webhook(webhook, color=color_,     thumbn
 
 Client.startListening()
 ```
+
+![](https://cdn.discordapp.com/attachments/1013403923782049942/1013843703921655919/unknown.png)
