@@ -14,8 +14,8 @@ A python SDK for receiving updates from the OpenSea Stream API - pushed over web
 Documentation: https://docs.opensea.io/reference/stream-api-overview
 
 # Installation
-This module requires Python 3 or later.
-Standard `go get`:
+This module requires Python 3 or later. 
+[Python 3](https://www.python.org/downloads/)
 
 ```
 pip install opensea_sdk
@@ -35,13 +35,12 @@ from opensea_sdk import *
 api_key = '' # Your opensea api key
 
 def callback(payload: dict):
-    # Do whatever you want
-    print(payload)
+    # handle event
     return
 
 Client = OpenseaStreamClient(api_key, Network.MAINNET)
-Client.onItemListed('azuki', callback)
-Client.onItemSold('doodles', callback)
+Client.onItemListed('collection-slug', callback)
+Client.onItemSold('collection-slug', callback)
 
 Client.startListening()
 ```
@@ -78,7 +77,6 @@ api_key = '' # Opensea api key
 
 def callback(payload: dict):
     # handle event
-    print(payload)
     return
 
 Client = OpenseaStreamClient(api_key, Network.TESTNET)
@@ -156,6 +154,39 @@ Types are included to make working with our event payload objects easier.
 
 # Webhook
 
-You might want to use our predefined discord webhook management
+You might want to use our predefined but fully cusotmizable discord webhook management 
 
+```python
+from opensea_sdk import *
+from discord_webhook import DiscordWebhook
 
+webhook = DiscordWebhook(url='') # Webhook Url
+api_key = '' # Opensea api key
+
+Client = OpenseaStreamClient(api_key, Network.MAINNET)
+
+Client.onItemListed('collection-slug', Webhook(webhook).send)
+
+Client.startListening()
+
+```
+
+You can change the color, the footer and the thumbnail of the webhook with this following arguments: 
+
+```python
+from opensea_sdk import *
+from discord_webhook import DiscordWebhook
+
+webhook = DiscordWebhook(url='') # Webhook Url
+api_key = '' # Opensea api key
+
+custom_footer = 'My custom footer'
+custom_thumbnail = '' # Image url
+color_ = '' # Hexadecimal color e.g ff0000 (red)
+
+Client = OpenseaStreamClient(api_key, Network.MAINNET)
+
+Client.onItemListed('collection-slug', Webhook(webhook, color=color_,     thumbnail=custom_thumbnail, footer=custom_footer).send)
+
+Client.startListening()
+```
